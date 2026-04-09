@@ -102,8 +102,8 @@ export default function Home() {
     }
   }
 
-  async function addTodo() {
-    event.preventDefault();
+  async function addTodo(e: FormEvent) {
+    e.preventDefault();
     setError(null);
 
     if (!title.trim()) {
@@ -264,7 +264,7 @@ export default function Home() {
         <section className="mb-8 grid gap-6 lg:grid-cols-[1.3fr_0.7fr]">
           <div className="rounded-3xl bg-white p-8 shadow-xl shadow-slate-200/70 ring-1 ring-slate-200">
             <h2 className="text-2xl font-semibold text-slate-900">Add a new task</h2>
-            <form className="mt-6 space-y-5" onSubmit={(e) => e.preventDefault()}>
+            <form className="mt-6 space-y-5" onSubmit={addTodo}>
               <div>
                 <label className="mb-2 block text-sm font-medium text-slate-700">Task title</label>
                 <input
@@ -321,8 +321,7 @@ export default function Home() {
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-sm text-slate-500">Add tasks that will save to your database.</p>
                 <button
-                  type="button"
-                  onClick={addTodo}
+                  type="submit"
                   disabled={loading}
                   className="inline-flex items-center justify-center rounded-full bg-sky-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-sky-700 disabled:cursor-not-allowed disabled:bg-slate-300"
                 >
