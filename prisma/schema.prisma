@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Todo {
+  id          Int      @id @default(autoincrement())
+  title       String   @db.Text
+  description String   @default("") @db.Text
+  completed   Boolean  @default(false)
+  priority    String   @default("MEDIUM")
+  dueDate     DateTime?
+  tags        String   @default("") @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt @default(now())
+
+  @@index([completed])
+  @@index([dueDate])
+  @@index([priority])
+}
